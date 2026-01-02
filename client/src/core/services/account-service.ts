@@ -1,0 +1,27 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { LoginDto, User } from '../../types/user';
+import { tap } from 'rxjs/internal/operators/tap';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AccountService {
+  private http = inject(HttpClient);
+  currentUser= signal<User|null>(null);
+  baseUrl = 'https://localhost:5001/api';
+
+  login(cred:LoginDto){
+    return this.http.post<User>(this.baseUrl+'/account/login',cred)
+    .pipe(
+      tap(user =>{
+        localStorage.setItem('user',JSON.stringify(user));
+        this.currentUser.set(user);
+      })
+    );
+  }
+  logout(){
+    localStorage.removeItem('user');
+    this.currentUser.set(null);
+  }
+}

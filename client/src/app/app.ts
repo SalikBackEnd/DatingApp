@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Nav } from "../layouts/nav/nav";
 import { AccountService } from '../core/services/account-service';
+import { Home } from '../features/home/home';
 
 @Component({
   selector: 'app-root',
-  imports: [Nav],
+  imports: [Nav,Home],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -9,7 +9,8 @@ import { Register } from "../register/register";
 })
 export class Home {
   protected registerMode = signal(false);
-  showRegister(){
-    this.registerMode.set(true);
+  showRegister(value:boolean){
+    this.registerMode.set(value);
   }
+
 }

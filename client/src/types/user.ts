@@ -10,3 +10,9 @@ export type LoginDto = {
   email:string,
   password:string
 };
+
+export type RegisterCred = {
+  email:string,
+  displayName:string,
+  password:string
+};

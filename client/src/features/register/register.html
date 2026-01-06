@@ -1,0 +1,12 @@
+<div class="card w-200 mx-auto rounded-lg shadow-lg p-6">
+  <h2 class="text-2xl font-bold mb-4 text-center text-violet-700">Create Your Account</h2>
+  <form class="flex flex-col gap-4" (ngSubmit)="onRegister()">
+    <input type="text" [(ngModel)]="cred.displayName" name="displayName" placeholder="Display Name" class="input input-bordered w-full px-1 py-2" />
+    <input type="email" [(ngModel)]="cred.email" name="email" placeholder="Email" class="input input-bordered w-full px-1 py-2" />
+    <input type="password" [(ngModel)]="cred.password" name="password" placeholder="Password" class="input input-bordered w-full px-1 py-2" />
+    <div class="flex items-center justify-end gap-3 mt-10">
+      <button class="bg-white text-violet-700 py-2 px-4 rounded hover:bg-violet-100 border border-violet-700">Cancel</button>
+      <button type="submit" class="bg-violet-700 text-white py-2 px-4 rounded hover:bg-violet-800">Register</button>
+    </div>
+  </form>
+</div>

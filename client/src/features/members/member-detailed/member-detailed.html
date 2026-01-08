@@ -5,10 +5,10 @@
       class="rounded-full mx-10 mt-2 object-cover"/>
       <div class="card-body p-0 px-2">
         <div class="flex flex-col item-center  ps-3">
-          <div class="flex text-xl text-primary">
-            {{member.displayName}}, 25
+          <div class="flex justify-center text-xl text-primary">
+            {{member.displayName}}, {{ member.dateOfBirth | age}}
           </div>
-          <div class="text-sm">
+          <div class="flex justify-center text-sm">
             {{member.city}}, {{member.country}}
           </div>
           <div class="divider m-1"></div>

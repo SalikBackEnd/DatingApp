@@ -3,10 +3,11 @@ import { MemberService } from '../../../core/services/member-service';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { Member } from '../../../types/member';
+import { AgePipe } from '../../../core/pipes/age-pipe';
 
 @Component({
   selector: 'app-member-detailed',
-  imports: [ RouterLink, RouterLinkActive,RouterOutlet],
+  imports: [ RouterLink, RouterLinkActive,RouterOutlet,AgePipe],
   templateUrl: './member-detailed.html',
   styleUrl: './member-detailed.css',
 })

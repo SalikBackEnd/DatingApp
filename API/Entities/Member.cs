@@ -1,11 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace API.Entities;
 
 public class Member
 {
-    public string Id {get;set;} = null;
+    public string Id {get;set;} = null!;
     public DateOnly DateOfBirth {get;set;}
     public string? ImageUrl {get;set;}
     public required string DisplayName {get;set;}
@@ -17,6 +18,9 @@ public class Member
     public string? Country {get;set;}
 
     //Navigation Property
+    [JsonIgnore]
+    public List<Photo> Photos {get;set;} = [];
+    [JsonIgnore]
     [ForeignKey(nameof(Id))]
     public AppUser User {get;set;} = null!;
 }

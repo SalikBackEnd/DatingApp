@@ -26,7 +26,16 @@
       </div>
     </div>
     <div class="card bg-base-100 w-3/4 p-6">
-      <h3 class="card-title text-2xl text-primary">{{title()}}</h3>
+      <div class="flex justify-between item-center">
+        <h3 class="card-title text-2xl text-primary">{{title()}}</h3>
+        @if(isLoggedInUser()){
+
+          <button class="btn btn-outline btn-primary"
+          (click)="this.memberService.editMode.set(!this.memberService.editMode())">
+          {{ this.memberService.editMode()? 'Cancel':'Edit'}}
+        </button>
+        }
+      </div>
       <div class="divider m-0"></div>
       <router-outlet/>
     </div>

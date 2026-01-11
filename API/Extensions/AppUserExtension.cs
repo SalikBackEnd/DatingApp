@@ -11,6 +11,7 @@ public static class AppUserExtension
     {
         return new AuthResponseDto
         {
+            Id = user.Id,
             Email = user.Email,
             DisplayName = user.DisplayName,
             PhotoUrl=user.ImageUrl,

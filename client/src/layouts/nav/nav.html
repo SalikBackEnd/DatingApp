@@ -33,9 +33,19 @@
       </div>
       @if(accountService.currentUser(); as user)
       {
-        <img [src]="user?.photoUrl || '/user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
-        <h4 class="text-white mr-3">{{user.displayName}}</h4>
-        <button (click)="logout()" class="text-white bg-red-600 py-1 px-3 rounded-md" type="button">Logout</button>
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" class="" role="button" class="flex item-center text-white text-xl gap-3">
+            <img [src]="user?.photoUrl || '/user.png'" alt="user avatar" class="w-10 h-10 rounded-full">
+            <span class="text-white mr-3">{{user.displayName}}</span>
+
+          </div>
+          <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 ">
+            <li><a routerLink="/members/{{user.id}}/profile">Edit Profile</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+
+        <!-- <button (click)="logout()" class="text-white bg-red-600 py-1 px-3 rounded-md" type="button">Logout</button> -->
       }
       @else {
 <form #loginForm="ngForm" (ngSubmit)="login()" class="flex item-center gap-3">

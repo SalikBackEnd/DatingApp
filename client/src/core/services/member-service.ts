@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { EditableMember, Member, Photo } from '../../types/member';
 import { single, tap } from 'rxjs';
+import { form } from '@angular/forms/signals';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,12 @@ export class MemberService {
 
   updateMember(member: EditableMember){
     return this.http.put(this.baseUrl+'members',member);
+  }
+
+  uploadPhoto(file: File){
+    const formData = new FormData();
+    formData.append('file',file);
+
+    return this.http.post<Photo>(this.baseUrl+'members/add-photo',formData);
   }
 }

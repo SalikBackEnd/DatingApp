@@ -11,7 +11,7 @@ import { form } from '@angular/forms/signals';
 export class MemberService {
   private http = inject(HttpClient);
   private baseUrl = environment.apiUrl;
-  editMode = signal(true);
+  editMode = signal(false);
   member = signal<Member|null>(null);
 
   getMembers(){
@@ -39,5 +39,9 @@ export class MemberService {
     formData.append('file',file);
 
     return this.http.post<Photo>(this.baseUrl+'members/add-photo',formData);
+  }
+
+  setMainPhoto(photo: Photo){
+    return this.http.put(this.baseUrl+'members/set-main-photo/'+photo.id,{});
   }
 }

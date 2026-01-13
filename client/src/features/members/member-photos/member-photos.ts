@@ -1,18 +1,22 @@
 import { Component, inject,  OnInit,  signal } from '@angular/core';
 import { MemberService } from '../../../core/services/member-service';
 import { ActivatedRoute } from '@angular/router';
-import { Photo } from '../../../types/member';
+import { Member, Photo } from '../../../types/member';
 import { ImageUpload } from '../../../shared/image-upload/image-upload';
+import { AccountService } from '../../../core/services/account-service';
+import { User } from '../../../types/user';
+import { StarButton } from "../../../shared/star-button/star-button";
 
 @Component({
   selector: 'app-member-photos',
-  imports: [ImageUpload],
+  imports: [ImageUpload, StarButton],
   templateUrl: './member-photos.html',
   styleUrl: './member-photos.css',
 })
 export class MemberPhotos implements OnInit{
   protected memberService = inject(MemberService);
   private route = inject(ActivatedRoute);
+  private accountService = inject(AccountService);
   protected photos= signal<Photo[]>([]);
   protected loading = signal<boolean>(false);
   ngOnInit(): void {
@@ -38,6 +42,21 @@ export class MemberPhotos implements OnInit{
         this.memberService.editMode.set(false);
         this.loading.set(false);
         this.photos.update(photos=>[...photos,photo])
+      }
+    });
+  }
+
+  setMainPhoto(photo: Photo){
+    this.memberService.setMainPhoto(photo).subscribe({
+      next: ()=>{
+        const currentUser =  this.accountService.currentUser() ;
+        if(currentUser)
+          currentUser.photoUrl = photo.url;
+        this.accountService.setCurrentUser(currentUser as User);
+        this.memberService.member.update(member=>({
+          ...member,
+          imageUrl: photo.url
+        }) as Member);
       }
     });
   }
